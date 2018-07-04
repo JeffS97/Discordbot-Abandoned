@@ -1,0 +1,71 @@
+const Discord = require('discord.js');
+const client = new Discord.Client();
+var methods = {}
+var messagerino = ['Banging your head against a wall burns 150 calories an hour.', 'A flock of crows is known as a murder.', 'The cigarette lighter was invented before the match.', 'Women blink nearly twice as often as men.', 'tiger is a god']
+
+  methods.help = function(message) {
+	const embed = new Discord.RichEmbed()
+
+  	.setAuthor("Help Menu")
+  	.setColor(0xf579f8)
+  	.setDescription("Prefix: ``t.``")
+  	.setThumbnail("https://i.imgur.com/DjR4kkN.jpg")
+  
+    .addField("t.profile", "Returns the user profile of yourself or a specified user.")
+
+  	.addField("t.avatar", "Returns the avatar of yourself or a specified user.")
+  
+    .addField("t.invite", "Gives you an invite link for the bot.")
+  
+    .addField("t.uptime", "Shows how long the bot has been running. ")
+
+  	.addField("t.listemoji", "Lists out all the emojis in the server.")
+  
+    .addField("t.lenny", "Returns a lenny face.")
+
+  	.addField("t.ping", "Pings the bot and returns time in milliseconds.")
+
+  	.addField("@ the bot", "gives you fun facts.")
+
+  message.channel.send({embed});
+//message.channel.send('**Help Menu**\nPrefix: ``t.``\n\n**t.avatar**\n Returns the avatar of yourself or a specified user\n\n**t.listemoji**\nLists out all the emoji of the server\n\n**t.ping**\nPings the bot and returns time in milliseconds\n\n**t.lenny**\nReturns a lenny face\n\n**@ the bot for a fun response**')
+}
+  methods.funfact=function(message){
+  var rand = Math.floor(Math.random() * messagerino.length)
+  return messagerino[rand]
+  }
+  
+  methods.invite = function(message, client){
+    const embed = new Discord.RichEmbed()
+    
+		.setColor(0xf579f8)
+    .setAuthor(client.user.username)
+    .setTitle("Click here to invite me to your server")
+    .setURL("https://discordapp.com/oauth2/authorize?client_id=463644074528997376&scope=bot&permissions=8")
+    .setThumbnail("https://i.imgur.com/DjR4kkN.jpg")
+    message.channel.send({embed})
+    }
+
+  methods.uptime = function(message, client){
+    message.channel.send(msToTime(client.uptime))
+}
+
+methods.emojilist = function(message){
+  const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+  message.channel.send(emojiList);
+}
+
+  function msToTime(duration) {
+    var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = parseInt((duration / 1000) % 60),
+    minutes = parseInt((duration / (1000 * 60)) % 60),
+    hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return hours + "h, " + minutes + "m, " + seconds + "s, " + milliseconds + "ms";
+}
+  
+ module.exports = methods;
