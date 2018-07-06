@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 var methods = {}
 var messagerino = ['Banging your head against a wall burns 150 calories an hour.', 'A flock of crows is known as a murder.', 'The cigarette lighter was invented before the match.', 'Women blink nearly twice as often as men.', 'tiger is a god']
+const talkedRecently = new Set();//declaring global variables
 
   methods.help = function(message, splitmsg) {
     
@@ -90,6 +91,10 @@ methods.reload = async function(message){
 
 methods.avatar = function(message, splitmsg){
   
+  if (talkedRecently.has(message.author.id)) {
+            message.channel.send("Wait 10 seconds before getting typing this again. - " + message.author);
+    } 
+    else {
   if(splitmsg[1] != message.mentions.users.first() || splitmsg[2]){
     message.reply("Incorrect use of command: t.avatar @user, please mention 1 user")
     return
@@ -116,6 +121,12 @@ methods.avatar = function(message, splitmsg){
 		.setImage(message.author.avatarURL)
 		message.channel.send({embed})
 }
+      talkedRecently.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after x amount of time
+          talkedRecently.delete(message.author.id);
+        }, 10000);
+    }
   }
 
 methods.servers = function(message, client){

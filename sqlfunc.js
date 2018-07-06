@@ -2,28 +2,29 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 var sqlmethods = {}
 
-const talkedRecently = new Set();//declaring global variables
+const talkedRecentlyprof = new Set();//declaring global variables
+const talkedRecentlylead = new Set();
 
 const sql = require("sqlite");
 sql.open("./score.sqlite");//end here
 
 sqlmethods.score = function(message){
-sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}" AND guildId = "${message.guild.id}"`).then(row => {
   if (!row) {
-    sql.run("INSERT INTO scores (nickname, userId, points, level) VALUES (?, ?, ?, ?)", [message.author.username, message.author.id, 1, 0]);
+    sql.run("INSERT INTO scores (guildId, nickname, userId, points, level) VALUES (?, ?, ?, ?, ?)", [message.guild.id, message.author.username, message.author.id, 1, 0]);
   } else {
     let curLevel = Math.floor(0.1 * Math.sqrt(row.points));
     if (curLevel > row.level) {
        row.level = curLevel;
-        sql.run(`UPDATE scores SET points = ${row.points + 3}, level = ${row.level} WHERE userId = ${message.author.id}`);
+        sql.run(`UPDATE scores SET points = ${row.points + 3}, level = ${row.level} WHERE userId = ${message.author.id} AND guildId = ${message.guild.id}`);
         message.reply(`You've leveled up to level **${curLevel}**! Congratulations!`);
       }
-      sql.run(`UPDATE scores SET points = ${row.points + 3} WHERE userId = ${message.author.id}`);
+      sql.run(`UPDATE scores SET points = ${row.points + 3} WHERE userId = ${message.author.id} AND guildId = ${message.guild.id}`);
     }
   }).catch(() => {
     console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS scores (nickname TEXT, userId TEXT, points INTEGER, level INTEGER)").then(() => {
-      sql.run("INSERT INTO scores (nickname, userId, points, level) VALUES (?, ?, ?, ?)", [message.author.username, message.author.id, 1, 0]);
+    sql.run("CREATE TABLE IF NOT EXISTS scores (guildId TEXT, nickname TEXT, userId TEXT, points INTEGER, level INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (guildId, nickname, userId, points, level) VALUES (?, ?, ?, ?, ?)", [message.guild.id, message.author.username, message.author.id, 1, 0]);
     });
   });
   }
@@ -33,7 +34,7 @@ sqlmethods.profile=function(message, splitmsg){
     var points
     var nextlevel
     
-    if (talkedRecently.has(message.author.id)) {
+    if (talkedRecentlyprof.has(message.author.id)) {
             message.channel.send("Wait 10 seconds before getting typing this again. - " + message.author);
     } 
     else {
@@ -92,10 +93,10 @@ sqlmethods.profile=function(message, splitmsg){
     });
     }
         // Adds the user to the set so that they can't talk for x amount of time
-        talkedRecently.add(message.author.id);
+        talkedRecentlyprof.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after x amount of time
-          talkedRecently.delete(message.author.id);
+          talkedRecentlyprof.delete(message.author.id);
         }, 10000);
     }
 }
@@ -106,22 +107,30 @@ sqlmethods.leaderboard = function(message, splitmsg){
   var pointlist = new Array()
   var i
   
-  
-  sql.all(`SELECT nickname, points FROM scores ORDER BY points DESC LIMIT 10`).then(rows => {
+  if (talkedRecentlylead.has(message.author.id)) {
+            message.channel.send("Wait 10 seconds before getting typing this again. - " + message.author);
+    } 
+    else {
+  sql.all(`SELECT nickname, points FROM scores WHERE guildId = ${message.guild.id} ORDER BY points DESC LIMIT 10`).then(rows => {
     rows.forEach(function (row){
       namelist.push(row.nickname.toString())
       pointlist.push(row.points.toString())
-      //ssage.channel.send(counter +". " + row.nickname + ' has :' + row.points)
     })
     const embed = new Discord.RichEmbed()
 		.setColor(0xf579f8)
-    .setAuthor('Top 10 in Server')
-    .setDescription("========================")
+    .setAuthor(`Top 10 in Server ${message.guild.name}`)
+    .setDescription("============================")
     for(i=1;i<=namelist.length;i++){
-      embed.addField(`${i}.${namelist[i-1]}`, pointlist[i-1])
+      embed.addField(`${i}.${namelist[i-1]}`, `${pointlist[i-1]} points`)
     }
       message.channel.send({embed})
   })
+      talkedRecentlylead.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after x amount of time
+          talkedRecentlylead.delete(message.author.id);
+        }, 10000);
+    }
 }
 
 module.exports = sqlmethods;
