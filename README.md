@@ -16,8 +16,8 @@ Available Commands
 
 ADMIN ONLY
 - t.reload `refreshes the bot code remotely`
-MORE TO COME
 
+MORE TO COME
 
 
 Made by Tiger

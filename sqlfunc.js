@@ -28,7 +28,7 @@ sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row =>
   });
   }
 
-sqlmethods.profile=function(message){
+sqlmethods.profile=function(message, splitmsg){
     var level
     var points
     var nextlevel
@@ -38,10 +38,10 @@ sqlmethods.profile=function(message){
     } 
     else {
       
-      /*if(splitmsg[1] != message.mentions.users.first() || splitmsg[2]){
+      if(splitmsg[1] != message.mentions.users.first() || splitmsg[2]){
     message.reply("Incorrect use of command: t.profile @user, please mention 1 user")
     return
-  }*/
+  }
       
       if(message.mentions.users.first()){
       sql.get(`SELECT * FROM scores WHERE userId ="${message.mentions.users.first().id}"`).then(row => {
