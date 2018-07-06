@@ -1,27 +1,26 @@
-Welcome to Glitch
-=================
+Welcome to Tiger's Discord Bot
+===============================
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+This is a WIP and a learning experience where i will be adding features and functions to my discord bot.
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
-
-Find out more [about Glitch](https://glitch.com/about).
-
-
-Your Project
-------------
-
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
-
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
-
-
-Made by [Fog Creek](https://fogcreek.com/)
+Available Commands
 -------------------
 
-\ ゜o゜)ノ
+- a scoring and leveling system which ties into user profile
+- t.profile `provides you with the user profile`
+- t.avatar `returns you with the avatar of yourself or a specified user`
+- t.invite `generates an invite link for the bot`
+- t.uptime `shows you how long the bot has been online in H M S MS`
+- t.listemoji `lists out all emojis in the current server`
+- t.lenny `sends a lenny face in chat`
+
+ADMIN ONLY
+- t.reload `refreshes the bot code remotely`
+MORE TO COME
+
+
+
+Made by Tiger
+-------------------
+
+Invite link to the bot [here](https://discordapp.com/oauth2/authorize?client_id=463644074528997376&scope=bot&permissions=8)
