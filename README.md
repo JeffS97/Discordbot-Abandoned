@@ -17,6 +17,8 @@ Available Commands
 
 ADMIN ONLY
 - t.reload `refreshes the bot code remotely`
+- t.servers `returns the number of servers the bot is connected to`
+- t.serverinfo `returns information about the server at index`
 
 MORE TO COME
 
