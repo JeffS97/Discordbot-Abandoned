@@ -6,7 +6,8 @@ This is a WIP and a learning experience where i will be adding features and func
 Available Commands
 -------------------
 
-- a scoring and leveling system which ties into user profile
+- a scoring and leveling system which ties into user profile and leaderboard
+- t.leaderboard `returns the top 10 users in the server`
 - t.profile `provides you with the user profile`
 - t.avatar `returns you with the avatar of yourself or a specified user`
 - t.invite `generates an invite link for the bot`

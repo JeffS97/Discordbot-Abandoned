@@ -10,7 +10,7 @@ sql.open("./score.sqlite");//end here
 sqlmethods.score = function(message){
 sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
   if (!row) {
-    sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+    sql.run("INSERT INTO scores (nickname, userId, points, level) VALUES (?, ?, ?, ?)", [message.author.username, message.author.id, 1, 0]);
   } else {
     let curLevel = Math.floor(0.1 * Math.sqrt(row.points));
     if (curLevel > row.level) {
@@ -22,8 +22,8 @@ sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row =>
     }
   }).catch(() => {
     console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+    sql.run("CREATE TABLE IF NOT EXISTS scores (nickname TEXT, userId TEXT, points INTEGER, level INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (nickname, userId, points, level) VALUES (?, ?, ?, ?)", [message.author.username, message.author.id, 1, 0]);
     });
   });
   }
@@ -98,6 +98,30 @@ sqlmethods.profile=function(message, splitmsg){
           talkedRecently.delete(message.author.id);
         }, 10000);
     }
+}
+
+sqlmethods.leaderboard = function(message, splitmsg){
+  var counter = 1;
+  var namelist = new Array()
+  var pointlist = new Array()
+  var i
+  
+  
+  sql.all(`SELECT nickname, points FROM scores ORDER BY points DESC LIMIT 10`).then(rows => {
+    rows.forEach(function (row){
+      namelist.push(row.nickname.toString())
+      pointlist.push(row.points.toString())
+      //ssage.channel.send(counter +". " + row.nickname + ' has :' + row.points)
+    })
+    const embed = new Discord.RichEmbed()
+		.setColor(0xf579f8)
+    .setAuthor('Top 10 in Server')
+    .setDescription("========================")
+    for(i=1;i<=namelist.length;i++){
+      embed.addField(`${i}.${namelist[i-1]}`, pointlist[i-1])
+    }
+      message.channel.send({embed})
+  })
 }
 
 module.exports = sqlmethods;
