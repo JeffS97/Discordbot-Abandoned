@@ -3,7 +3,9 @@ const client = new Discord.Client();
 var methods = {}
 var messagerino = ['Banging your head against a wall burns 150 calories an hour.', 'A flock of crows is known as a murder.', 'The cigarette lighter was invented before the match.', 'Women blink nearly twice as often as men.', 'tiger is a god']
 
-  methods.help = function(message) {
+  methods.help = function(message, splitmsg) {
+    
+  if(!splitmsg[1]){
 	const embed = new Discord.RichEmbed()
 
   	.setAuthor("Help Menu")
@@ -28,7 +30,24 @@ var messagerino = ['Banging your head against a wall burns 150 calories an hour.
   	.addField("@ the bot", "gives you fun facts.")
 
   message.channel.send({embed});
-//message.channel.send('**Help Menu**\nPrefix: ``t.``\n\n**t.avatar**\n Returns the avatar of yourself or a specified user\n\n**t.listemoji**\nLists out all the emoji of the server\n\n**t.ping**\nPings the bot and returns time in milliseconds\n\n**t.lenny**\nReturns a lenny face\n\n**@ the bot for a fun response**')
+  }
+    
+    if(splitmsg[1] === "admin" && message.author.id === "122343952933191680"){
+      const embed = new Discord.RichEmbed()
+
+  	.setAuthor("Help Menu")
+  	.setColor(0xf579f8)
+  	.setDescription("Prefix: ``t.``")
+  	.setThumbnail("https://i.imgur.com/DjR4kkN.jpg")
+  
+    .addField("t.reload", "Refreshes the code for updates.")
+
+  	.addField("t.servers", "Check how many servers the bot is connected to.")
+  
+    .addField("t.serverinfo", "Shows you the details of the server at index.")
+  
+  message.channel.send({embed});
+    }
 }
   
   methods.funfact = function(message){
@@ -96,6 +115,21 @@ methods.avatar = function(message, splitmsg){
 		message.channel.send({embed})
 }
   }
+
+methods.servers = function(message, client){
+  message.channel.send(`Serving ${client.guilds.size} guilds with ${client.users.size} users`)
+}
+
+methods.serverinfo = async function(message, client, num){
+  var gmap = client.guilds.map(g => g.name)
+  if(num>=gmap.length){
+    await message.channel.send("Invalid server number")
+    return
+  }
+  else{
+  message.channel.send(gmap[num])
+  }
+}
 
   function msToTime(duration) {
     var milliseconds = parseInt((duration % 1000) / 100),

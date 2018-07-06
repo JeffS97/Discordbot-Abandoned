@@ -44,7 +44,7 @@ for(i = 0; i < commandlist.length; i++){//checks if first word exists in command
 sqlfunc.score(message)//for leveling/score related
   
 switch(command){
-  case 't.help':func.help(message);break;
+  case 't.help':func.help(message, splitmsg);break;
   case 't.uptime':func.uptime(message, client);break;
   case 't.invite':func.invite(message,client);break;
   case 't.lenny':message.channel.send("( ͡° ͜ʖ ͡°)");break;
@@ -53,7 +53,10 @@ switch(command){
   case 't.profile':sqlfunc.profile(message, splitmsg);break;
   case 't.avatar':func.avatar(message, splitmsg);break;
   case 't.ping':func.ping(message, client);break;
+    //admin commands
   case 't.reload':if(message.author.id === "122343952933191680"){func.reload(message)} else{message.reply("YOU'RE NOT TIGER!!")};break;
+  case 't.servers':if(message.author.id === "122343952933191680"){func.servers(message, client)} else{message.reply("YOU'RE NOT TIGER!!")};break;
+  case 't.serverinfo':if(message.author.id === "122343952933191680"){func.serverinfo(message, client, (parseInt(splitmsg[1])-1))}else{message.reply("YOU'RE NOT TIGER!!")};break;
   default:
               }
 });
