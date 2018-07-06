@@ -13,6 +13,8 @@ var messagerino = ['Banging your head against a wall burns 150 calories an hour.
   	.setDescription("Prefix: ``t.``")
   	.setThumbnail("https://i.imgur.com/DjR4kkN.jpg")
   
+    .addField("t.leaderboard", "Displays the top 10 users in the server.")
+  
     .addField("t.profile", "Returns the user profile of yourself or a specified user.")
 
   	.addField("t.avatar", "Returns the avatar of yourself or a specified user.")

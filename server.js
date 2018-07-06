@@ -53,6 +53,7 @@ switch(command){
   case 't.profile':sqlfunc.profile(message, splitmsg);break;
   case 't.avatar':func.avatar(message, splitmsg);break;
   case 't.ping':func.ping(message, client);break;
+  case 't.leaderboard':sqlfunc.leaderboard(message, splitmsg);break;
     //admin commands
   case 't.reload':if(message.author.id === "122343952933191680"){func.reload(message)} else{message.reply("YOU'RE NOT TIGER!!")};break;
   case 't.servers':if(message.author.id === "122343952933191680"){func.servers(message, client)} else{message.reply("YOU'RE NOT TIGER!!")};break;
