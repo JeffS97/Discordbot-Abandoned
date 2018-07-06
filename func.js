@@ -67,7 +67,12 @@ methods.reload = async function(message){
     process.exit(1)
 }
 
-methods.avatar = function(message){
+methods.avatar = function(message, splitmsg){
+  
+  if(splitmsg[1] != message.mentions.users.first() || splitmsg[2]){
+    message.reply("Incorrect use of command: t.avatar @user, please mention 1 user")
+    return
+  }
   
 	if(message.mentions.users.first()){
 		const embed = new Discord.RichEmbed()
