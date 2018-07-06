@@ -30,9 +30,15 @@ var messagerino = ['Banging your head against a wall burns 150 calories an hour.
   message.channel.send({embed});
 //message.channel.send('**Help Menu**\nPrefix: ``t.``\n\n**t.avatar**\n Returns the avatar of yourself or a specified user\n\n**t.listemoji**\nLists out all the emoji of the server\n\n**t.ping**\nPings the bot and returns time in milliseconds\n\n**t.lenny**\nReturns a lenny face\n\n**@ the bot for a fun response**')
 }
-  methods.funfact=function(message){
+  
+  methods.funfact = function(message){
   var rand = Math.floor(Math.random() * messagerino.length)
   return messagerino[rand]
+  }
+  
+  methods.ping = async function(message, client){
+    const m = await message.channel.send("Ping?");
+    m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`)
   }
   
   methods.invite = function(message, client){
@@ -54,6 +60,37 @@ methods.emojilist = function(message){
   const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
   message.channel.send(emojiList);
 }
+
+methods.reload = async function(message){
+    console.log('Refreshing Program.')
+    const m = await message.reply("Refreshing Program.");
+    process.exit(1)
+}
+
+methods.avatar = function(message){
+  
+	if(message.mentions.users.first()){
+		const embed = new Discord.RichEmbed()
+    
+    .setColor(0xf579f8)
+		.setAuthor(message.mentions.users.first().tag)
+		.setTitle("Avatar URL Link")
+		.setURL(message.mentions.users.first().avatarURL)
+		.setImage(message.mentions.users.first().avatarURL)
+		 message.channel.send({embed})
+	}
+	
+	else{
+	const embed = new Discord.RichEmbed()
+	  
+    .setColor(0xf579f8)
+		.setAuthor(message.author.tag)
+		.setTitle("Avatar URL Link")
+		.setURL(message.author.avatarURL)
+		.setImage(message.author.avatarURL)
+		message.channel.send({embed})
+}
+  }
 
   function msToTime(duration) {
     var milliseconds = parseInt((duration % 1000) / 100),
