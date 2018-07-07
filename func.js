@@ -48,6 +48,8 @@ const talkedRecently = new Set();//declaring global variables
   	.addField("t.servers", "Check how many servers the bot is connected to.")
   
     .addField("t.serverinfo", "Shows you the details of the server at index.")
+      
+    .addField("t.sendlog", "DMs you the log file.")
   
   message.channel.send({embed});
     }
@@ -75,7 +77,7 @@ const talkedRecently = new Set();//declaring global variables
     }
 
   methods.uptime = function(message, client){
-    message.channel.send(msToTime(client.uptime))
+    message.channel.send(methods.msToTime(client.uptime))
 }
 
 methods.emojilist = function(message){
@@ -95,9 +97,10 @@ methods.avatar = function(message, splitmsg){
             message.channel.send("Wait 10 seconds before getting typing this again. - " + message.author);
     } 
     else {
-  if(splitmsg[1] != message.mentions.users.first() || splitmsg[2]){
-    message.reply("Incorrect use of command: t.avatar @user, please mention 1 user")
-    return
+      
+  if(splitmsg[1] && !splitmsg[1].startsWith("<@") || splitmsg[2]){
+      message.reply("Incorrect use of command: t.profile @user, please mention 1 user")
+      return
   }
   
 	if(message.mentions.users.first()){
@@ -144,7 +147,7 @@ methods.serverinfo = async function(message, client, num){
   }
 }
 
-  function msToTime(duration) {
+  methods.msToTime = function(duration) {
     var milliseconds = parseInt((duration % 1000) / 100),
     seconds = parseInt((duration / 1000) % 60),
     minutes = parseInt((duration / (1000 * 60)) % 60),

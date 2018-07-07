@@ -5,7 +5,7 @@
   "name": "discordbot",
   "version": "6.11.0",
   "description": "A simple Node app built on Express, instantly up and running.",
-  "main": "node server.js",
+  "main": "env TZ='Asia/Singapore' node server.jsnode server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
