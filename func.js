@@ -4,6 +4,9 @@ var methods = {}
 var messagerino = ['Banging your head against a wall burns 150 calories an hour.', 'A flock of crows is known as a murder.', 'The cigarette lighter was invented before the match.', 'Women blink nearly twice as often as men.', 'tiger is a god']
 const talkedRecently = new Set();//declaring global variables
 
+var fs = require('fs')
+var Attachment = require('discord.js').Attachment
+
   methods.help = function(message, splitmsg) {
     
   if(!splitmsg[1]){
@@ -145,6 +148,23 @@ methods.serverinfo = async function(message, client, num){
   else{
   message.channel.send(gmap[num])
   }
+}
+
+methods.addLog = function(message){
+fs.appendFile('log.txt', `${message.createdAt} | ${message.guild.name} | ${message.channel.name}: ${message.author.tag}: ${message}\n`, function (err) {
+  if (err) {
+      console.log(`Failed to write message ${message} by ${message.author.tag} to logs`)
+  }
+})
+}
+
+methods.sendlog = async function(message){
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  
+  var date = [pad(message.createdAt.getDate()), pad(message.createdAt.getMonth()+1), message.createdAt.getFullYear(), message.createdAt.getHours(), message.createdAt.getMinutes()].join('/');
+  const m = await message.author.send(`Logs`, {files: [new Attachment("./log.txt", `log ${date}`)]})
+  
+  fs.truncate('./log.txt', 0, function(){console.log('logs cleared as sent')})
 }
 
   methods.msToTime = function(duration) {
