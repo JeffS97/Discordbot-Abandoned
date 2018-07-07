@@ -21,7 +21,7 @@ ADMIN ONLY
 - t.reload `refreshes the bot code remotely`
 - t.servers `returns the number of servers the bot is connected to`
 - t.serverinfo `returns information about the server at index`
-- t.sendlog `sends the logs stored in logs.txt in a DM`
+- t.sendlog `sends the logs stored in logs.txt in a DM and clears the log file`
 
 MORE TO COME
 

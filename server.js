@@ -5,7 +5,7 @@ const TOKEN = process.env.TOKEN;
 const func = require('./func')
 const sqlfunc = require('./sqlfunc')
 
-  var fs = require('fs')
+var fs = require('fs')
 
 const http = require('http');//this is just to make sure the glitch.com app doesnt go to sleep
 const express = require('express');
@@ -34,12 +34,6 @@ client.on('message', async message => {
   if (message.channel.type === "dm") return;
   if(message.author.bot) return;
   
-fs.appendFile('log.txt', `${message.createdAt} | ${message.guild.name} | ${message.channel.name}: ${message.author.tag}: ${message}\n`, function (err) {
-  if (err) {
-      console.log(`Failed to write message ${message} by ${message.author.tag} to logs`)
-  }
-})
-  
 var splitmsg = message.content.split(" ")//splits the message at spaces
 var command = splitmsg[0]//takes the first word as the command
 
@@ -49,6 +43,7 @@ for(i = 0; i < commandlist.length; i++){//checks if first word exists in command
 	}
 }
   
+func.addLog(message)
 sqlfunc.score(message)//for leveling/score related
   
 switch(command){
@@ -66,11 +61,7 @@ switch(command){
   case 't.reload':if(message.author.id === "122343952933191680"){func.reload(message)} else{message.reply("YOU'RE NOT TIGER!!")};break;
   case 't.servers':if(message.author.id === "122343952933191680"){func.servers(message, client)} else{message.reply("YOU'RE NOT TIGER!!")};break;
   case 't.serverinfo':if(message.author.id === "122343952933191680"){func.serverinfo(message, client, (parseInt(splitmsg[1])-1))}else{message.reply("YOU'RE NOT TIGER!!")};break;
-  case 't.sendlog':if(message.author.id === "122343952933191680"){message.author.send(`Logs`, {
-  files: [
-    "./log.txt"
-  ]
-})} else{ message.reply("YOU'RE NOT TIGER!!")};break;
+  case 't.sendlog':if(message.author.id === "122343952933191680"){func.sendlog(message)} else{ message.reply("YOU'RE NOT TIGER!!")};break;
   default:
               }
 });

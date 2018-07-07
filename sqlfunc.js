@@ -123,6 +123,7 @@ sqlmethods.leaderboard = function(message, splitmsg){
     for(i=1;i<=namelist.length;i++){
       embed.addField(`${i}.${namelist[i-1]}`, `${pointlist[i-1]} points`)
     }
+      embed.setThumbnail(message.guild.iconURL)
       message.channel.send({embed})
   })
       talkedRecentlylead.add(message.author.id);
