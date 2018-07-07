@@ -7,6 +7,7 @@ Available Commands
 -------------------
 
 - a scoring and leveling system which ties into user profile and leaderboard
+- t.help `sends the help menu`
 - t.leaderboard `returns the top 10 users in the server`
 - t.profile `provides you with the user profile`
 - t.avatar `returns you with the avatar of yourself or a specified user`
@@ -16,9 +17,11 @@ Available Commands
 - t.lenny `sends a lenny face in chat`
 
 ADMIN ONLY
+- t.help admin `sends the admin command list`
 - t.reload `refreshes the bot code remotely`
 - t.servers `returns the number of servers the bot is connected to`
 - t.serverinfo `returns information about the server at index`
+- t.sendlog `sends the logs stored in logs.txt in a DM`
 
 MORE TO COME
 

@@ -1753,3 +1753,8 @@ Sat Jul 07 2018 20:56:33 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff
 Sat Jul 07 2018 20:57:49 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: <@!185713706343071745> i been coding on glitch so long
 Sat Jul 07 2018 20:57:49 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: i didnt know
 Sat Jul 07 2018 20:57:52 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: you can upload files from your pc
+Sat Jul 07 2018 20:59:27 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: turtle#1082: how?
+Sat Jul 07 2018 20:59:28 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: turtle#1082: wtf
+Sat Jul 07 2018 20:59:31 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: turtle#1082: i dont know eothe
+Sat Jul 07 2018 20:59:46 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: click assets
+Sat Jul 07 2018 20:59:50 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: then add asset at the top
