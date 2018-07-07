@@ -5,8 +5,6 @@ const TOKEN = process.env.TOKEN;
 const func = require('./func')
 const sqlfunc = require('./sqlfunc')
 
-var fs = require('fs')
-
 const http = require('http');//this is just to make sure the glitch.com app doesnt go to sleep
 const express = require('express');
 const app = express();
