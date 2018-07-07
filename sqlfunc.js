@@ -39,9 +39,9 @@ sqlmethods.profile=function(message, splitmsg){
     } 
     else {
       
-      if(splitmsg[1] != message.mentions.users.first() || splitmsg[2]){
-    message.reply("Incorrect use of command: t.profile @user, please mention 1 user")
-    return
+    if(splitmsg[1] && !splitmsg[1].startsWith("<@") || splitmsg[2]){
+      message.reply("Incorrect use of command: t.profile @user, please mention 1 user")
+      return
   }
       
       if(message.mentions.users.first()){
