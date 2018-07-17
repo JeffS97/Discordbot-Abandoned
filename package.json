@@ -5,7 +5,7 @@
   "name": "discordbot",
   "version": "6.11.0",
   "description": "A simple Node app built on Express, instantly up and running.",
-  "main": "env TZ='Asia/Singapore' node server.jsnode server.js",
+  "main": "env TZ='Asia/Singapore' node server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -15,7 +15,8 @@
     "discord.js": "^11.3.2",
     "discord": "^0.8.2",
     "sqlite": "^2.9.2",
-    "Set": "^0.4.1"
+    "Set": "^0.4.1",
+    "random": "^2.0.12"
   },
   "engines": {
     "node": "8.4.0"
