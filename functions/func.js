@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 var methods = {}
-var messagerino = ['Banging your head against a wall burns 150 calories an hour.', 'A flock of crows is known as a murder.', 'The cigarette lighter was invented before the match.', 'Women blink nearly twice as often as men.', 'tiger is a god']
+//var messagerino = ['Banging your head against a wall burns 150 calories an hour.', 'A flock of crows is known as a murder.', 'The cigarette lighter was invented before the match.', 'Women blink nearly twice as often as men.', 'tiger is a god']
 const talkedRecently = new Set();//declaring global variables
 
 var fs = require('fs')
@@ -59,9 +59,13 @@ var Attachment = require('discord.js').Attachment
 }
   
   methods.funfact = function(message){
-  var rand = Math.floor(Math.random() * messagerino.length)
-  return messagerino[rand]
-  }
+  fs.readFile('funfacts.txt', function(err, data){
+    if(err) throw err;
+    var lines = data.toString().split('\n');
+    var message2 = lines[Math.floor(Math.random()*lines.length)];
+    message.reply(message2)
+ })
+}
   
   methods.ping = async function(message, client){
     const m = await message.channel.send("Ping?");
@@ -156,6 +160,15 @@ fs.appendFile('log.txt', `${message.createdAt} | ${message.guild.name} | ${messa
       console.log(`Failed to write message ${message} by ${message.author.tag} to logs`)
   }
 })
+}
+
+methods.autoLog = function(message){
+  const stats = fs.statSync("log.txt")
+  const fileSizeInBytes = stats.size
+  const fileSizeInKilobytes = fileSizeInBytes / 1000.0
+  if(fileSizeInKilobytes > 700){
+    methods.sendlog(message)
+  }
 }
 
 methods.sendlog = async function(message){

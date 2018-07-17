@@ -15,13 +15,14 @@ Available Commands
 - t.uptime `shows you how long the bot has been online in H M S MS`
 - t.listemoji `lists out all emojis in the current server`
 - t.lenny `sends a lenny face in chat`
+- mention the bot `gives you a random fun fact out of a list of 200`
 
 ADMIN ONLY
 - t.help admin `sends the admin command list`
 - t.reload `refreshes the bot code remotely`
 - t.servers `returns the number of servers the bot is connected to`
 - t.serverinfo `returns information about the server at index`
-- t.sendlog `sends the logs stored in logs.txt in a DM and clears the log file`
+- t.sendlog `sends the logs and clears the log file (logs are otherwise automatically deleted once filesize reaches 100kb`
 
 MORE TO COME
 
