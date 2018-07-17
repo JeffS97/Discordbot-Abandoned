@@ -2,8 +2,8 @@ const Discord = require('discord.js');//all requirements
 const client = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 
-const func = require('./functions/func')
-const sqlfunc = require('./functions/sqlfunc')
+const func = require('../functions/func')
+const sqlfunc = require('../functions/sqlfunc')
 
 const http = require('http');//this is just to make sure the glitch.com app doesnt go to sleep
 const express = require('express');

@@ -155,7 +155,7 @@ methods.serverinfo = async function(message, client, num){
 }
 
 methods.addLog = function(message){
-fs.appendFile('log.txt', `${message.createdAt} | ${message.guild.name} | ${message.channel.name}: ${message.author.tag}: ${message}\n`, function (err) {
+fs.appendFile('./database/log.txt', `${message.createdAt} | ${message.guild.name} | ${message.channel.name}: ${message.author.tag}: ${message}\n`, function (err) {
   if (err) {
       console.log(`Failed to write message ${message} by ${message.author.tag} to logs`)
   }
@@ -163,7 +163,7 @@ fs.appendFile('log.txt', `${message.createdAt} | ${message.guild.name} | ${messa
 }
 
 methods.autoLog = function(message){
-  const stats = fs.statSync("log.txt")
+  const stats = fs.statSync("./database/log.txt")
   const fileSizeInBytes = stats.size
   const fileSizeInKilobytes = fileSizeInBytes / 1000.0
   if(fileSizeInKilobytes > 700){
@@ -175,9 +175,9 @@ methods.sendlog = async function(message){
   function pad(s) { return (s < 10) ? '0' + s : s; }
   
   var date = [pad(message.createdAt.getDate()), pad(message.createdAt.getMonth()+1), message.createdAt.getFullYear(), message.createdAt.getHours(), message.createdAt.getMinutes()].join('/');
-  const m = await message.author.send(`Logs`, {files: [new Attachment("./log.txt", `log ${date}`)]})
+  const m = await message.author.send(`Logs`, {files: [new Attachment("./database/log.txt", `log ${date}`)]})
   
-  fs.truncate('./log.txt', 0, function(){console.log('logs cleared as sent')})
+  fs.truncate('./database/log.txt', 0, function(){console.log('logs cleared as sent')})
 }
 
   methods.msToTime = function(duration) {
