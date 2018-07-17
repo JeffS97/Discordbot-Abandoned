@@ -59,7 +59,7 @@ var Attachment = require('discord.js').Attachment
 }
   
   methods.funfact = function(message){
-  fs.readFile('funfacts.txt', function(err, data){
+  fs.readFile('./database/funfacts.txt', function(err, data){
     if(err) throw err;
     var lines = data.toString().split('\n');
     var message2 = lines[Math.floor(Math.random()*lines.length)];
