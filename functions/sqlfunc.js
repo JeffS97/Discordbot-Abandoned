@@ -6,7 +6,7 @@ const talkedRecentlyprof = new Set();//declaring global variables
 const talkedRecentlylead = new Set();
 
 const sql = require("sqlite");
-sql.open("./score.sqlite");//end here
+sql.open("./database/score.sqlite");//end here
 
 sqlmethods.score = function(message){
 sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}" AND guildId = "${message.guild.id}"`).then(row => {

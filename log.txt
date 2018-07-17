@@ -154,3 +154,20 @@ Tue Jul 17 2018 17:17:30 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff
 Tue Jul 17 2018 17:17:31 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Willa#1866: lenny
 Tue Jul 17 2018 17:17:31 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Willa#1866: shrug
 Tue Jul 17 2018 17:17:35 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Willa#1866: t.lenny
+Tue Jul 17 2018 17:20:27 GMT+0800 (+08) | Faraway Drifted Kingdom | general: Zexol#3125: pifo
+Tue Jul 17 2018 17:21:51 GMT+0800 (+08) | Faraway Drifted Kingdom | botcommands: Willa#1866: !q sea
+Tue Jul 17 2018 17:21:56 GMT+0800 (+08) | Faraway Drifted Kingdom | botcommands: Willa#1866: !q2 sea
+Tue Jul 17 2018 17:23:34 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: t.reload
+Tue Jul 17 2018 17:23:43 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: t.leaderboard
+Tue Jul 17 2018 17:23:45 GMT+0800 (+08) | Faraway Drifted Kingdom | general: Zexol#3125: no
+Tue Jul 17 2018 17:23:48 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: <@463644074528997376>
+Tue Jul 17 2018 17:23:59 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: ❄Sxcion❄#3424: <@463644074528997376>
+Tue Jul 17 2018 17:24:24 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: ❄Sxcion❄#3424: w h o a
+Tue Jul 17 2018 17:24:26 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: ❄Sxcion❄#3424: i want to see
+Tue Jul 17 2018 17:24:30 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: ?
+Tue Jul 17 2018 17:24:37 GMT+0800 (+08) | Faraway Drifted Kingdom | pokemon-adventures: Zexol#3125: pcatch goldish
+Tue Jul 17 2018 17:24:47 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: ❄Sxcion❄#3424: the instructions for collecting taxes after a nuclear war
+Tue Jul 17 2018 17:24:48 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: ❄Sxcion❄#3424: good bot
+Tue Jul 17 2018 17:24:52 GMT+0800 (+08) | Faraway Drifted Kingdom | pokemon-adventures: Zexol#3125: pcatch goldeen
+Tue Jul 17 2018 17:25:26 GMT+0800 (+08) | Faraway Drifted Kingdom | coding-stuff: Tiger#5216: t.help
+Tue Jul 17 2018 17:25:28 GMT+0800 (+08) | Faraway Drifted Kingdom | general: Willa#1866: he always want to go to loo
