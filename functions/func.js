@@ -32,6 +32,8 @@ var adminID = process.env.ADMINID
     .addField("t.lenny", "Returns a lenny face.")
 
   	.addField("t.ping", "Pings the bot and returns time in milliseconds.")
+  
+    .addField("t.daily", "Gives you random amount of credits between 100 and 200 every 6 hours")
 
   	.addField("@ the bot", "gives you fun facts.")
 
