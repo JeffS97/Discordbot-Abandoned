@@ -24,7 +24,7 @@ client.on('ready', () => {//on bot start
   client.user.setPresence({ status: 'online', game: { name: 't.help for commands' } });
 });//end here
 
-const adminID = "122343952933191680"
+const adminID = process.env.ADMINID
 var commandlist = ['t.help', 't.ping', 't.lenny', 't.avatar', 't.listemoji', 't.invite', 't.profile', 't.uptime']// list of commands the bot can execute
 var e = new Date()
 var i//end here

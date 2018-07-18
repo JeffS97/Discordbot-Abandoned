@@ -22,7 +22,7 @@ ADMIN ONLY
 - t.reload `refreshes the bot code remotely`
 - t.servers `returns the number of servers the bot is connected to`
 - t.serverinfo `returns information about the server at index`
-- t.sendlog `sends the logs and clears the log file (logs are otherwise automatically deleted once filesize reaches 700kb`
+- t.sendlog `sends the logs and clears the log file (automatically done once filesize reaches 700kb`
 
 MORE TO COME
 
