@@ -4,6 +4,7 @@ var sqlmethods = {}
 
 const talkedRecentlyprof = new Set();//declaring global variables
 const talkedRecentlylead = new Set();
+const dailydone = new Set();
 
 const sql = require("sqlite");
 sql.open("./database/score.sqlite");//end here
@@ -11,7 +12,7 @@ sql.open("./database/score.sqlite");//end here
 sqlmethods.score = function(message){
 sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}" AND guildId = "${message.guild.id}"`).then(row => {
   if (!row) {
-    sql.run("INSERT INTO scores (guildId, nickname, userId, points, level) VALUES (?, ?, ?, ?, ?)", [message.guild.id, message.author.username, message.author.id, 1, 0]);
+    sql.run("INSERT INTO scores (guildId, nickname, userId, points, level, credits) VALUES (?, ?, ?, ?, ?, ?)", [message.guild.id, message.author.username, message.author.id, 1, 0, 0]);
   } else {
     let curLevel = Math.floor(0.1 * Math.sqrt(row.points));
     if (curLevel > row.level) {
@@ -23,8 +24,8 @@ sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}" AND guildId =
     }
   }).catch(() => {
     console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS scores (guildId TEXT, nickname TEXT, userId TEXT, points INTEGER, level INTEGER)").then(() => {
-      sql.run("INSERT INTO scores (guildId, nickname, userId, points, level) VALUES (?, ?, ?, ?, ?)", [message.guild.id, message.author.username, message.author.id, 1, 0]);
+    sql.run("CREATE TABLE IF NOT EXISTS scores (guildId TEXT, nickname TEXT, userId TEXT, points INTEGER, level INTEGER, credits INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (guildId, nickname, userId, points, level, credits) VALUES (?, ?, ?, ?, ?, ?)", [message.guild.id, message.author.username, message.author.id, 1, 0, 0]);
     });
   });
   }
@@ -33,6 +34,7 @@ sqlmethods.profile=function(message, splitmsg){
     var level
     var points
     var nextlevel
+    var credits
     
     if (talkedRecentlyprof.has(message.author.id)) {
             message.channel.send("Wait 10 seconds before getting typing this again. - " + message.author);
@@ -49,11 +51,13 @@ sqlmethods.profile=function(message, splitmsg){
       if (!row) {
         level = 0
         points = 0
+        credits = 0
         nextlevel = 100
       }
       else{
       level = row.level
       points = row.points
+      credits = row.credits
       nextlevel = Math.pow(((level + 1)*10), 2)
       }
 		const embed = new Discord.RichEmbed()
@@ -63,6 +67,7 @@ sqlmethods.profile=function(message, splitmsg){
 		.setImage(message.mentions.users.first().avatarURL , 200 , 200)
     .addField("Level", level.toString())
     .addField("Points", `${points} / ${nextlevel}`)
+    .addField("Credits", `${credits}`)
     
 		 message.channel.send({embed})
     });
@@ -74,10 +79,12 @@ sqlmethods.profile=function(message, splitmsg){
         level = 0
         points = 0
         nextlevel = 100
+        credits = 0
       }
       else{
       level = row.level
       points = row.points
+      credits = row.credits
       nextlevel = Math.pow(((level + 1)*10), 2)
       }
       const embed = new Discord.RichEmbed()
@@ -87,6 +94,7 @@ sqlmethods.profile=function(message, splitmsg){
 		  .setImage(message.author.avatarURL)
       .addField("Level", `${level}`)
       .addField("Points", `${points} / ${nextlevel}`)
+      .addField("Credits", `${credits}`)
   
 		  message.channel.send({embed})
       
@@ -132,6 +140,24 @@ sqlmethods.leaderboard = function(message, splitmsg){
           talkedRecentlylead.delete(message.author.id);
         }, 10000);
     }
+}
+
+sqlmethods.daily = function(message, splitmsg){
+  if(dailydone.has(message.author.id)){
+    message.reply("Daily can only be done every 6 hours!")
+  }
+  else{
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}" AND guildId = "${message.guild.id}"`).then(row => {
+      var rancredits = Math.round((Math.random()*(200-100)+100)/10)*10;
+    sql.run(`UPDATE scores SET credits = ${row.credits + rancredits} WHERE userId = ${message.author.id}`);
+      message.channel.send("You have been given " + rancredits + " credits")
+})
+    dailydone.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after x amount of time
+          dailydone.delete(message.author.id);
+        }, 21600000);
+  }
 }
 
 module.exports = sqlmethods;
