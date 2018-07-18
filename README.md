@@ -15,6 +15,7 @@ Available Commands
 - t.uptime `shows you how long the bot has been online in H M S MS`
 - t.listemoji `lists out all emojis in the current server`
 - t.lenny `sends a lenny face in chat`
+- t.daily `gives you X amount of credits every 6 hours`
 - mention the bot `gives you a random fun fact out of a list of 200`
 
 ADMIN ONLY
