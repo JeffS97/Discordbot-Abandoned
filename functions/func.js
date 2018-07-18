@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 var methods = {}
-//var messagerino = ['Banging your head against a wall burns 150 calories an hour.', 'A flock of crows is known as a murder.', 'The cigarette lighter was invented before the match.', 'Women blink nearly twice as often as men.', 'tiger is a god']
 const talkedRecently = new Set();//declaring global variables
 
 var fs = require('fs')
 var Attachment = require('discord.js').Attachment
+var adminID = process.env.ADMINID
 
   methods.help = function(message, splitmsg) {
     
@@ -38,7 +38,7 @@ var Attachment = require('discord.js').Attachment
   message.channel.send({embed});
   }
     
-    if(splitmsg[1] === "admin" && message.author.id === "122343952933191680"){
+    if(splitmsg[1] === "admin" && message.author.id === adminID){
       const embed = new Discord.RichEmbed()
 
   	.setAuthor("Help Menu")
@@ -173,9 +173,12 @@ methods.autoLog = function(message){
 
 methods.sendlog = async function(message){
   function pad(s) { return (s < 10) ? '0' + s : s; }
+    
+    let members = message.channel.members;
+    let guildMember = members.find('id', adminID);
   
   var date = [pad(message.createdAt.getDate()), pad(message.createdAt.getMonth()+1), message.createdAt.getFullYear(), message.createdAt.getHours(), message.createdAt.getMinutes()].join('/');
-  const m = await message.author.send(`Logs`, {files: [new Attachment("./database/log.txt", `log ${date}`)]})
+  const m = await guildMember.send(`Logs`, {files: [new Attachment("./database/log.txt", `log ${date}.txt`)]})
   
   fs.truncate('./database/log.txt', 0, function(){console.log('logs cleared as sent')})
 }
