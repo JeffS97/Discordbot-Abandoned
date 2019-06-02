@@ -2,6 +2,10 @@ const Discord = require('discord.js');//all requirements
 const client = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 
+const needle = require('needle');  
+//const otcsv = require('objects-to-csv');  
+const cheerio = require('cheerio');  
+
 const func = require('../functions/func')
 const sqlfunc = require('../functions/sqlfunc')
 
@@ -25,7 +29,7 @@ client.on('ready', () => {//on bot start
 });//end here
 
 const adminID = process.env.ADMINID
-var commandlist = ['t.help', 't.ping', 't.lenny', 't.avatar', 't.listemoji', 't.invite', 't.profile', 't.uptime', 't.daily']// list of commands the bot can execute
+var commandlist = ['t.help', 't.ping', 't.lenny', 't.avatar', 't.listemoji', 't.invite', 't.profile', 't.uptime', 't.daily', 't.define']// list of commands the bot can execute
 var e = new Date()
 var i//end here
 
@@ -58,6 +62,7 @@ switch(command){
   case 't.ping':func.ping(message, client);break;
   case 't.leaderboard':sqlfunc.leaderboard(message, splitmsg);break;
   case 't.daily':sqlfunc.daily(message, splitmsg);break;
+  case 't.define':func.define(message, splitmsg);break;
     //admin commands
   case 't.reload':if(message.author.id === adminID){func.reload(message)} else{message.reply("YOU'RE NOT TIGER!!")};break;
   case 't.servers':if(message.author.id === adminID){func.servers(message, client)} else{message.reply("YOU'RE NOT TIGER!!")};break;
