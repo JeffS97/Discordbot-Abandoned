@@ -1,5 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
+const request = require('request');  
+//const otcsv = require('objects-to-csv');  
+const cheerio = require('cheerio');  
+const baseURL = 'https://www.merriam-webster.com/dictionary/';  
+
 var methods = {}
 const talkedRecently = new Set();//declaring global variables
 
@@ -34,6 +40,8 @@ var adminID = process.env.ADMINID
   	.addField("t.ping", "Pings the bot and returns time in milliseconds.")
   
     .addField("t.daily", "Gives you random amount of credits between 100 and 200 every 6 hours")
+  
+    .addField("t.define", "Gives you the dictionary definition of the specified word")
 
   	.addField("@ the bot", "gives you fun facts.")
 
@@ -197,5 +205,51 @@ methods.sendlog = async function(message){
 
     return hours + "h, " + minutes + "m, " + seconds + "s, " + milliseconds + "ms";
 }
+
+methods.define = function(message, splitmsg){
+  
+  request(baseURL+splitmsg[1], function (error, response, html) {
+    var k;
+    var i;
+    var sendtext = "";
+    var example =[];
+    var list = [];
+    
+    const test = cheerio.load(html);
+    test('div[id="dictionary-entry-1"]').find('span.ex-sent.first-child.t.no-aq.sents').each(function (index, element) {
+      example.push(test(element).text());
+    })
+    
+    for(k=0;k<example.length;k++){
+      example[k] = example[k].replace(/\s\s+/g, ' ');
+    }
+    
+    test('div[id="dictionary-entry-1"]').find('span.ex-sent.first-child.t.no-aq.sents').remove()
+    
+    test('div[id="dictionary-entry-1"]').find('span.dtText').each(function (index, element) {
+      list.push(test(element).text());
+    })
+    
+    test('div[id="dictionary-entry-2"]').find('span.dtText').each(function (index, element) {
+      list.push(test(element).text());
+    })
+
+    for(i=0;i<list.length;i++){
+      list[i] = list[i].replace(/\s\s+/g, ' ');
+      if(list[i]){
+     sendtext+=i+1+". "+list[i]+"\n"
+      }
+    }
+    
+    if(sendtext!=""){
+      message.channel.send("Definitions for the word: "+ splitmsg[1])
+      message.channel.send(sendtext)
+    }
+    else(message.channel.send("Word does not exist!"))
+    
+    if(example!="")
+      message.channel.send("Example(s): \n"+example)
+})
+          }
   
  module.exports = methods;
