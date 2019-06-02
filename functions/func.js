@@ -237,13 +237,13 @@ methods.define = function(message, splitmsg){
     for(i=0;i<list.length;i++){
       list[i] = list[i].replace(/\s\s+/g, ' ');
       if(list[i]){
-     sendtext+=i+1+". "+list[i]+"\n"
+     sendtext+=i+1+list[i]+"\n"
       }
     }
     
     if(sendtext!=""){
-      message.channel.send("Definitions for the word: "+ splitmsg[1])
-      message.channel.send(sendtext)
+      message.channel.send("Definition(s) for the word: ``"+ splitmsg[1]+"``")
+      message.channel.send("```glsl\n"+sendtext+"```")
     }
     else(message.channel.send("Word does not exist!"))
     
